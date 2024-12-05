@@ -11,8 +11,8 @@ import (
 )
 
 func main() {
-	data, err := os.ReadFile("./internal/inputs/day01.txt")
-	// data, err := os.ReadFile("./internal/day01/example.txt")
+	data, err := os.ReadFile("./2024/inputs/day01.txt")
+	// data, err := os.ReadFile("./2024/day01/example.txt")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -6,9 +6,21 @@ import (
 	"os"
 )
 
+type Day struct {
+	Number int
+}
+
+func NewDay(dayNumber int) Day {
+	return Day{
+		Number: dayNumber,
+	}
+}
+
 func main() {
-	// data, err := os.ReadFile("./internal/inputs/day04.txt")
-	data, err := os.ReadFile("./internal/day04/example.txt")
+	// day := NewDay(4)
+
+	// data, err := os.ReadFile("./2024/inputs/day04.txt")
+	data, err := os.ReadFile("./2024/day04/example.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
