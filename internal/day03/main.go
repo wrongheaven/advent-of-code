@@ -43,17 +43,33 @@ func part1(data string) (int, error) {
 }
 
 func part2(data string) (int, error) {
-	// re := regexp.MustCompile(`don\'t\(\).*do\(\)`)
-	// matches := re.FindAllString(data, -1)
+	// const (
+	// 	DO_MATCH   = 4
+	// 	DONT_MATCH = 7
+	// )
 
-	// for _, match := range matches {
-	// 	idx := strings.Index(match, "do()")
-	// 	if idx < len(match)-1-len("do()") {
-	// 		match = match[:idx]
+	// re := regexp.MustCompile(`(do\(\)|don\'t\(\))`)
+	// matches := re.FindAllStringIndex(data, -1)
+
+	// removeIdxs := [][]int{}
+	// for i := 0; i < len(matches)-1; i++ {
+	// 	if matches[i][1]-matches[i][0] == DONT_MATCH {
+	// 		for j := i + 1; j < len(matches); j++ {
+	// 			if matches[j][1]-matches[j][0] == DO_MATCH {
+	// 				removeIdxs = append(removeIdxs, []int{matches[i][0], matches[j][1]})
+	// 				i = j + 1
+	// 			}
+	// 		}
 	// 	}
-
-	// 	data = strings.ReplaceAll(data, match, " ")
 	// }
 
-	return part1(data)
+	// for i := len(removeIdxs) - 1; i >= 0; i-- {
+	// 	p := data[:removeIdxs[i][0]]
+	// 	q := data[removeIdxs[i][1]:]
+	// 	data = p + q
+	// }
+
+	// return part1(data)
+
+	return 0, nil
 }
