@@ -5,13 +5,14 @@ import (
 	"log"
 	"math"
 	"os"
+	"slices"
 	"strconv"
 	"strings"
 )
 
 func main() {
-	// data, err := os.ReadFile("./internal/inputs/day02.txt")
-	data, err := os.ReadFile("./internal/day02/example.txt")
+	data, err := os.ReadFile("./internal/inputs/day02.txt")
+	// data, err := os.ReadFile("./internal/day02/example.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -113,37 +114,16 @@ func part2(data []byte) (int, error) {
 }
 
 func isSafe2(report []int) bool {
-	numAscending := 0
-	numDescending := 0
+	if isSafe1(report) {
+		return true
+	}
 
-	numBadReports := 0
-	for i := 0; i < len(report)-1; i++ {
-		diff := report[i] - report[i+1]
-
-		if math.Abs(float64(diff)) > 3 {
-			numBadReports++
-		}
-
-		if diff == 0 {
-			numBadReports++
-		} else if diff < 0 {
-			numAscending++
-		} else {
-			numDescending++
+	for i := range report {
+		newReport := slices.Delete(slices.Clone(report), i, i+1)
+		if isSafe1(newReport) {
+			return true
 		}
 	}
 
-	if numBadReports > 1 {
-		return false
-	}
-
-	if numAscending > 1 && numDescending > 1 {
-		return false
-	}
-
-	if numBadReports > 0 && numAscending > 0 && numDescending > 0 {
-		return false
-	}
-
-	return true
+	return false
 }
