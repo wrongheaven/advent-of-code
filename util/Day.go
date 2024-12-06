@@ -41,20 +41,20 @@ func (d Day) Run(part1, part2 PartFunc) (ex1, ans1, ex2, ans2 int) {
 
 	ex1, err := part1(exampleLines)
 	if err != nil {
-		ex1 = 0
+		ex1 = -1
 	}
 	ans1, err = part1(inputLines)
 	if err != nil {
-		ans1 = 0
+		ans1 = -1
 	}
 
 	ex2, err = part2(exampleLines)
 	if err != nil {
-		ex2 = 0
+		ex2 = -1
 	}
 	ans2, err = part2(inputLines)
 	if err != nil {
-		ans2 = 0
+		ans2 = -1
 	}
 
 	return ex1, ans1, ex2, ans2

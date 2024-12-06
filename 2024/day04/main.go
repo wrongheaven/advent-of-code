@@ -2,45 +2,130 @@ package main
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/wrongheaven/advent-of-code-2024/util"
 )
 
 func main() {
 	day := util.NewDay(2024, 4)
-	ans1, err := part1(day)
-	if err != nil {
-		log.Fatal(err)
-	}
-	ans2, err := part2(day)
-	if err != nil {
-		log.Fatal(err)
-	}
 
-	// // data, err := os.ReadFile("./2024/inputs/day04.txt")
-	// data, err := os.ReadFile("./2024/day04/example.txt")
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	ex1, ans1, ex2, ans2 := day.Run(part1, part2)
 
-	// ans1, err := part1(string(data))
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	fmt.Printf("Part 1: %d\n", ans1)
-
-	// ans2, err := part2(string(data))
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	fmt.Printf("Part 2: %d\n", ans2)
+	fmt.Println("Example 1:", ex1)
+	fmt.Println("Input   1:", ans1)
+	fmt.Println("Example 2:", ex2)
+	fmt.Println("Input   2:", ans2)
 }
 
-func part1(day util.Day) (int, error) {
-	return 0, nil
+func part1(lines []string) (int, error) {
+	totalWords := 0
+	for row := range lines {
+		for col := range lines[row] {
+			if lines[row][col] == 'X' {
+				totalWords += countWordsFound(lines, row, col)
+			}
+		}
+	}
+
+	return totalWords, nil
 }
 
-func part2(day util.Day) (int, error) {
-	return 0, nil
+func countWordsFound(lines []string, row, col int) int {
+	wordsFound := 0
+	// north
+	if row >= 3 &&
+		lines[row-1][col] == 'M' &&
+		lines[row-2][col] == 'A' &&
+		lines[row-3][col] == 'S' {
+		wordsFound++
+	}
+	// south
+	if row < len(lines)-3 &&
+		lines[row+1][col] == 'M' &&
+		lines[row+2][col] == 'A' &&
+		lines[row+3][col] == 'S' {
+		wordsFound++
+	}
+	// east
+	if col < len(lines[row])-3 &&
+		lines[row][col+1] == 'M' &&
+		lines[row][col+2] == 'A' &&
+		lines[row][col+3] == 'S' {
+		wordsFound++
+	}
+	// west
+	if col >= 3 &&
+		lines[row][col-1] == 'M' &&
+		lines[row][col-2] == 'A' &&
+		lines[row][col-3] == 'S' {
+		wordsFound++
+	}
+	// ne
+	if row >= 3 && col < len(lines[row])-3 &&
+		lines[row-1][col+1] == 'M' &&
+		lines[row-2][col+2] == 'A' &&
+		lines[row-3][col+3] == 'S' {
+		wordsFound++
+	}
+	// nw
+	if row >= 3 && col >= 3 &&
+		lines[row-1][col-1] == 'M' &&
+		lines[row-2][col-2] == 'A' &&
+		lines[row-3][col-3] == 'S' {
+		wordsFound++
+	}
+	// se
+	if row < len(lines)-3 && col < len(lines[row])-3 &&
+		lines[row+1][col+1] == 'M' &&
+		lines[row+2][col+2] == 'A' &&
+		lines[row+3][col+3] == 'S' {
+		wordsFound++
+	}
+	// sw
+	if row < len(lines)-3 && col >= 3 &&
+		lines[row+1][col-1] == 'M' &&
+		lines[row+2][col-2] == 'A' &&
+		lines[row+3][col-3] == 'S' {
+		wordsFound++
+	}
+
+	return wordsFound
+}
+
+func part2(lines []string) (int, error) {
+	totalWords := 0
+	for row := range lines {
+		for col := range lines[row] {
+			if lines[row][col] == 'M' {
+				totalWords += countMAS(lines, row, col)
+			}
+		}
+	}
+
+	return totalWords, nil
+}
+
+func countMAS(lines []string, row, col int) int {
+	wordsFound := 0
+
+	// se
+	if row < len(lines)-2 && col < len(lines[row])-2 &&
+		lines[row+1][col+1] == 'A' &&
+		lines[row+2][col+2] == 'S' {
+		if lines[row][col+2] == 'M' && lines[row+2][col] == 'S' ||
+			lines[row+2][col] == 'M' && lines[row][col+2] == 'S' {
+			wordsFound++
+		}
+	}
+	// nw
+	if row >= 2 && col >= 2 &&
+		lines[row-1][col-1] == 'A' &&
+		lines[row-2][col-2] == 'S' {
+		if lines[row][col-2] == 'M' && lines[row-2][col] == 'S' ||
+			lines[row-2][col] == 'M' && lines[row][col-2] == 'S' {
+			wordsFound++
+		}
+	}
+
+	return wordsFound
 }
