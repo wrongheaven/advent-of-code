@@ -11,13 +11,7 @@ import (
 
 func main() {
 	day := util.NewDay(2024, 5)
-
-	ex1, ans1, ex2, ans2 := day.Run(part1, part2)
-
-	fmt.Println("Example 1:", ex1)
-	fmt.Println("Input   1:", ans1)
-	fmt.Println("Example 2:", ex2)
-	fmt.Println("Input   2:", ans2)
+	day.PrintResults(part1, part2)
 }
 
 func parseInput(lines []string) (orderingRules [][2]int, updates [][]int) {

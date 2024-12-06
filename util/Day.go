@@ -35,7 +35,7 @@ func NewDay(year, day int) Day {
 	return newDay
 }
 
-func (d Day) Run(part1, part2 PartFunc) (ex1, ans1, ex2, ans2 int) {
+func (d Day) run(part1, part2 PartFunc) (ex1, ans1, ex2, ans2 int) {
 	exampleLines := d.exampleLines()
 	inputLines := d.inputLines()
 
@@ -66,4 +66,12 @@ func (d Day) exampleLines() []string {
 
 func (d Day) inputLines() []string {
 	return strings.Split(d.input, "\n")
+}
+
+func (d Day) PrintResults(part1, part2 PartFunc) {
+	ex1, ans1, ex2, ans2 := d.run(part1, part2)
+	fmt.Println("Example 1:", ex1)
+	fmt.Println("Input   1:", ans1)
+	fmt.Println("Example 2:", ex2)
+	fmt.Println("Input   2:", ans2)
 }

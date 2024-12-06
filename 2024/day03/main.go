@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
@@ -11,13 +10,7 @@ import (
 
 func main() {
 	day := util.NewDay(2024, 3)
-
-	ex1, ans1, ex2, ans2 := day.Run(part1, part2)
-
-	fmt.Println("Example 1:", ex1)
-	fmt.Println("Input   1:", ans1)
-	fmt.Println("Example 2:", ex2)
-	fmt.Println("Input   2:", ans2)
+	day.PrintResults(part1, part2)
 }
 
 func part1(lines []string) (int, error) {
