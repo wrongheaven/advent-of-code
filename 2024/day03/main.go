@@ -22,7 +22,6 @@ func main() {
 
 func part1(lines []string) (int, error) {
 	re := regexp.MustCompile(`mul\((\d+),(\d+)\)`)
-
 	matches := re.FindAllStringSubmatch(strings.Join(lines, "\n"), -1)
 
 	multSum := 0
@@ -36,33 +35,26 @@ func part1(lines []string) (int, error) {
 }
 
 func part2(lines []string) (int, error) {
-	// const (
-	// 	DO_MATCH   = 4
-	// 	DONT_MATCH = 7
-	// )
 
-	// re := regexp.MustCompile(`(do\(\)|don\'t\(\))`)
-	// matches := re.FindAllStringIndex(data, -1)
+	str := strings.Join(lines, "\n")
 
-	// removeIdxs := [][]int{}
-	// for i := 0; i < len(matches)-1; i++ {
-	// 	if matches[i][1]-matches[i][0] == DONT_MATCH {
-	// 		for j := i + 1; j < len(matches); j++ {
-	// 			if matches[j][1]-matches[j][0] == DO_MATCH {
-	// 				removeIdxs = append(removeIdxs, []int{matches[i][0], matches[j][1]})
-	// 				i = j + 1
-	// 			}
-	// 		}
-	// 	}
-	// }
+	for i := 0; i < len(str); i++ {
+		if strings.HasPrefix(str[i:], "don't()") {
+			str, i = redactStringPart(str, i)
+		}
+	}
 
-	// for i := len(removeIdxs) - 1; i >= 0; i-- {
-	// 	p := data[:removeIdxs[i][0]]
-	// 	q := data[removeIdxs[i][1]:]
-	// 	data = p + q
-	// }
+	return part1([]string{str})
+}
 
-	// return part1(data)
+func redactStringPart(str string, idx int) (newStr string, newIdx int) {
+	for i := idx; i < len(str); i++ {
+		if strings.HasPrefix(str[i:], "do()") {
+			return str, i
+		}
 
-	return 0, nil
+		str = str[:i] + "x" + str[i+1:]
+	}
+
+	return str, len(str)
 }
