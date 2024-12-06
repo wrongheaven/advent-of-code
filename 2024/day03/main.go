@@ -2,35 +2,28 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"regexp"
 	"strconv"
+	"strings"
+
+	"github.com/wrongheaven/advent-of-code-2024/util"
 )
 
 func main() {
-	data, err := os.ReadFile("./2024/inputs/day03.txt")
-	// data, err := os.ReadFile("./2024/day03/example.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
+	day := util.NewDay(2024, 3)
 
-	ans1, err := part1(string(data))
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Part 1: %d\n", ans1)
+	ex1, ans1, ex2, ans2 := day.Run(part1, part2)
 
-	ans2, err := part2(string(data))
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Part 2: %d\n", ans2)
+	fmt.Println("Example 1:", ex1)
+	fmt.Println("Input   1:", ans1)
+	fmt.Println("Example 2:", ex2)
+	fmt.Println("Input   2:", ans2)
 }
 
-func part1(data string) (int, error) {
+func part1(lines []string) (int, error) {
 	re := regexp.MustCompile(`mul\((\d+),(\d+)\)`)
-	matches := re.FindAllStringSubmatch(data, -1)
+
+	matches := re.FindAllStringSubmatch(strings.Join(lines, "\n"), -1)
 
 	multSum := 0
 	for _, match := range matches {
@@ -42,7 +35,7 @@ func part1(data string) (int, error) {
 	return multSum, nil
 }
 
-func part2(data string) (int, error) {
+func part2(lines []string) (int, error) {
 	// const (
 	// 	DO_MATCH   = 4
 	// 	DONT_MATCH = 7

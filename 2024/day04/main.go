@@ -3,45 +3,44 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
+
+	"github.com/wrongheaven/advent-of-code-2024/util"
 )
 
-type Day struct {
-	Number int
-}
-
-func NewDay(dayNumber int) Day {
-	return Day{
-		Number: dayNumber,
-	}
-}
-
 func main() {
-	// day := NewDay(4)
-
-	// data, err := os.ReadFile("./2024/inputs/day04.txt")
-	data, err := os.ReadFile("./2024/day04/example.txt")
+	day := util.NewDay(2024, 4)
+	ans1, err := part1(day)
+	if err != nil {
+		log.Fatal(err)
+	}
+	ans2, err := part2(day)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	ans1, err := part1(string(data))
-	if err != nil {
-		log.Fatal(err)
-	}
+	// // data, err := os.ReadFile("./2024/inputs/day04.txt")
+	// data, err := os.ReadFile("./2024/day04/example.txt")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// ans1, err := part1(string(data))
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 	fmt.Printf("Part 1: %d\n", ans1)
 
-	ans2, err := part2(string(data))
-	if err != nil {
-		log.Fatal(err)
-	}
+	// ans2, err := part2(string(data))
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 	fmt.Printf("Part 2: %d\n", ans2)
 }
 
-func part1(data string) (int, error) {
+func part1(day util.Day) (int, error) {
 	return 0, nil
 }
 
-func part2(data string) (int, error) {
+func part2(day util.Day) (int, error) {
 	return 0, nil
 }

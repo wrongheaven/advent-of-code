@@ -2,41 +2,35 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"math"
-	"os"
 	"slices"
 	"strconv"
 	"strings"
+
+	"github.com/wrongheaven/advent-of-code-2024/util"
 )
 
 func main() {
-	data, err := os.ReadFile("./2024/inputs/day02.txt")
-	// data, err := os.ReadFile("./2024/day02/example.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
+	day := util.NewDay(2024, 2)
 
-	ans1, err := part1(data)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Part 1: %d\n", ans1)
+	ex1, ans1, ex2, ans2 := day.Run(part1, part2)
 
-	ans2, err := part2(data)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Part 2: %d\n", ans2)
+	fmt.Println("Example 1:", ex1)
+	fmt.Println("Input   1:", ans1)
+	fmt.Println("Example 2:", ex2)
+	fmt.Println("Input   2:", ans2)
 }
 
-func part1(data []byte) (int, error) {
+func part1(lines []string) (int, error) {
 	reports := [][]int{}
-	for _, line := range strings.Split(string(data), "\n") {
+	for _, line := range lines {
 		lineSplit := strings.Split(line, " ")
-
 		report := []int{}
 		for _, level := range lineSplit {
+			if level == "" {
+				continue
+			}
+
 			levelInt, err := strconv.Atoi(level)
 			if err != nil {
 				return 0, err
@@ -86,9 +80,9 @@ func isSafe1(report []int) bool {
 	return true
 }
 
-func part2(data []byte) (int, error) {
+func part2(lines []string) (int, error) {
 	reports := [][]int{}
-	for _, line := range strings.Split(string(data), "\n") {
+	for _, line := range lines {
 		lineSplit := strings.Split(line, " ")
 
 		report := []int{}

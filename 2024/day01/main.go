@@ -2,39 +2,30 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"math"
-	"os"
 	"slices"
 	"strconv"
 	"strings"
+
+	"github.com/wrongheaven/advent-of-code-2024/util"
 )
 
 func main() {
-	data, err := os.ReadFile("./2024/inputs/day01.txt")
-	// data, err := os.ReadFile("./2024/day01/example.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
+	day := util.NewDay(2024, 1)
 
-	ans1, err := part1(data)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Part 1: %d\n", ans1)
+	ex1, ans1, ex2, ans2 := day.Run(part1, part2)
 
-	ans2, err := part2(data)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Part 2: %d\n", ans2)
+	fmt.Println("Example 1:", ex1)
+	fmt.Println("Input   1:", ans1)
+	fmt.Println("Example 2:", ex2)
+	fmt.Println("Input   2:", ans2)
 }
 
-func part1(data []byte) (int, error) {
+func part1(lines []string) (int, error) {
 	var list1 []int = []int{}
 	var list2 []int = []int{}
 
-	for _, line := range strings.Split(string(data), "\n") {
+	for _, line := range lines {
 		nums := strings.Split(line, " ")
 		n1, err := strconv.Atoi(nums[0])
 		if err != nil {
@@ -59,13 +50,13 @@ func part1(data []byte) (int, error) {
 	return totalDiff, nil
 }
 
-func part2(data []byte) (int, error) {
+func part2(lines []string) (int, error) {
 	hashmap := make(map[int]int)
 
 	var list1 []int = []int{}
 	var list2 []int = []int{}
 
-	for _, line := range strings.Split(string(data), "\n") {
+	for _, line := range lines {
 		nums := strings.Split(line, " ")
 		n1, err := strconv.Atoi(nums[0])
 		if err != nil {
